@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "excel2csv"
+
+if ARGV.length < 1
+  puts 'usage: excel2csv <INPUT_FILE>'
+  return
+end
+
+main = Excel2csv::Main.new(ARGV[0])
+main.validate
+main.call
