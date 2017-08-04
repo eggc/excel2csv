@@ -10,7 +10,7 @@ if ARGV.length < 1
   return
 end
 
-csv_option = { encoding: ARGV[1] ? "#{ARGV[1]}:UTF-8": 'SJIS:UTF-8' }
+csv_option = { encoding: ARGV[1] ? "#{ARGV[1]}:UTF-8": 'UTF-8:UTF-8' }
 main = Excel2csv::Main.new(ARGV[0])
 main.validate
 main.inverse(csv_option)
