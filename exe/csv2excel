@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "excel2csv"
+
+if ARGV.length < 1
+  puts 'usage: csv2excel <INPUT_FILE> [CSV_ENCODING]'
+  puts 'example 1: csv2excel users.csv'
+  puts 'example 2: csv2excel users_sjis.csv SJIS'
+  return
+end
+
+csv_option = { encoding: ARGV[1] ? "#{ARGV[1]}:UTF-8": 'SJIS:UTF-8' }
+main = Excel2csv::Main.new(ARGV[0])
+main.validate
+main.inverse(csv_option)

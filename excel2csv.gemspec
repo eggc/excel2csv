@@ -25,4 +25,6 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "nokogiri", "~> 1.8"
   spec.add_runtime_dependency "roo", "~> 2.7"
+  spec.add_runtime_dependency "axlsx", "~> 1.3"
+  spec.add_runtime_dependency "zip-zip", "~> 0.3" # https://github.com/randym/axlsx/issues/234
 end
