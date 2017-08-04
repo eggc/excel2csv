@@ -30,7 +30,7 @@ module Excel2csv
       style = package.workbook.styles.add_style(xlsx_style)
       package.workbook.add_worksheet(name: basename) do |sheet|
         CSV.foreach(@path, csv_option) do |row|
-          sheet.add_row(row.to_a, style: style)
+          sheet.add_row(row.to_a, style: style, types: xlsx_types(row))
         end
       end
       package.use_shared_strings = true
@@ -39,9 +39,17 @@ module Excel2csv
 
     private
 
+    # 先頭の 0 が落ちる問題があるため強制的に文字列型とする。
+    def xlsx_types(row)
+      @xlsx_type ||= Array.new(row.length, :string)
+    end
+
+    # フォント指定しないと自動で変なフォントが選ばれることがあるので指定する。
     def xlsx_style
-      { font_name: 'メイリオ',
-        alignment: { horizontal: :left, wrap_text: true } }
+      @xlsx_style ||= {
+        font_name: 'メイリオ',
+        alignment: { horizontal: :left, wrap_text: true }
+      }
     end
 
     def basename
