@@ -1,5 +1,6 @@
 require "excel2csv/version"
 require "excel2csv/excel_maker"
+require "excel2csv/csv_encoder"
 require "roo"
 require "csv"
 
@@ -29,6 +30,10 @@ module Excel2csv
       excel_maker = ExcelMaker.new
       excel_maker.add_sheet(basename, CSV.read(@path, csv_option))
       excel_maker.save("#{basename}.xlsx")
+    end
+
+    def csv_encode(before_encoding:, after_encoding:, to:)
+      CsvEncoder.new(@path).call(before_encoding, after_encoding, to)
     end
 
     private

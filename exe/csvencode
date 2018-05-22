@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "excel2csv"
+
+if ARGV.length < 2
+  puts 'usage: csvencode <INPUT_FILE> <BEFORE_ENCODING> <AFTER_ENCODING> <OUTPUT_FILE>'
+  puts 'example: csvencode users.csv SJIS UTF8 new_users.csv'
+  return
+end
+
+main = Excel2csv::Main.new(ARGV[0])
+main.validate
+main.csv_encode(before_encoding: ARGV[1], after_encoding: ARGV[2], to: ARGV[3])
